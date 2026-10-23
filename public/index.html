@@ -1,0 +1,170 @@
+ <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HaulHero | Long-distance moves from Los Angeles</title>
+  <meta name="description" content="Get a planning estimate for your interstate move from Los Angeles. We confirm the final price before you pay a deposit.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;800&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/site.css">
+</head>
+<body>
+  <a class="skip" href="#request">Skip to the request form</a>
+
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="HaulHero home"><span class="mark" aria-hidden="true">H</span>HaulHero</a>
+    <nav aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">Questions</a>
+      <a id="my-booking" href="#" hidden>Your booking</a>
+    </nav>
+    <a class="btn btn-small" href="#request">Request a move</a>
+  </header>
+
+  <main>
+    <!-- Hero: the estimator is the first thing on the page -->
+    <section class="hero" id="top">
+      <div class="wrap">
+        <h1>Move out of Los Angeles. Pay only after we confirm the price.</h1>
+        <p class="lede">Get a planning estimate in seconds. Our team checks your route and date, confirms the final price, and only then do you pay a deposit.</p>
+
+        <form id="estimator" class="sentence" novalidate>
+          <p>
+            I'm moving from
+            <input id="e-from" name="from" type="text" value="Los Angeles, CA" maxlength="160" aria-label="Moving from" autocomplete="off" class="w-from">
+            to
+            <input id="e-to" name="to" type="text" placeholder="Phoenix, AZ" maxlength="160" aria-label="Moving to" autocomplete="off" class="w-to">,
+            about
+            <input id="e-miles" name="miles" type="number" inputmode="numeric" min="1" max="10000" placeholder="370" aria-label="Driving distance in miles" class="w-num">
+            miles, with a
+            <select id="e-home" name="home" aria-label="Home size">
+              <option value="studio">studio</option>
+              <option value="1br">1-bedroom</option>
+              <option value="2br" selected>2-bedroom</option>
+              <option value="3br">3-bedroom</option>
+              <option value="4br">4-bedroom or larger</option>
+            </select>
+            home of roughly
+            <input id="e-weight" name="weight" type="number" inputmode="numeric" min="1" max="80000" aria-label="Estimated weight in pounds" class="w-num">
+            lb.
+          </p>
+          <div class="routes" role="group" aria-label="Popular routes from Los Angeles">
+            <span>Popular routes:</span>
+            <button type="button" class="chip" data-to="Las Vegas, NV" data-miles="270">Las Vegas</button>
+            <button type="button" class="chip" data-to="Phoenix, AZ" data-miles="370">Phoenix</button>
+            <button type="button" class="chip" data-to="San Francisco, CA" data-miles="380">San Francisco</button>
+            <button type="button" class="chip" data-to="Denver, CO" data-miles="1015">Denver</button>
+            <button type="button" class="chip" data-to="Seattle, WA" data-miles="1135">Seattle</button>
+            <button type="button" class="chip" data-to="Dallas, TX" data-miles="1435">Dallas</button>
+          </div>
+        </form>
+
+        <div class="sign" id="sign" aria-live="polite">
+          <div class="sign-places"><span id="s-from">Los Angeles, CA</span><span id="s-to">Your destination</span></div>
+          <div class="road" id="route-draw" aria-hidden="true">
+            <i class="dot"></i><i class="dot end"></i>
+            <svg class="truck" viewBox="0 0 30 20" width="30" height="20"><rect x="0" y="2" width="19" height="13" rx="2"/><rect x="20" y="6" width="10" height="9" rx="2"/><circle cx="6" cy="16" r="3"/><circle cx="24" cy="16" r="3"/></svg>
+          </div>
+          <div class="sign-result">
+            <div>
+              <p class="sign-label">Planning estimate</p>
+              <p class="sign-price" id="s-price">&mdash;</p>
+              <p class="sign-note" id="s-note">Add where you're going and the distance to see your estimate.</p>
+            </div>
+            <button type="button" class="btn btn-lane" id="to-request">Request this move</button>
+          </div>
+        </div>
+        <p class="fine">An estimate is for planning only. We confirm the route, your weight and our availability before giving you a final price.</p>
+      </div>
+    </section>
+
+    <!-- How it works: a real sequence, so numbered -->
+    <section class="band dark" id="how">
+      <div class="wrap">
+        <h2>How a move works</h2>
+        <ol class="steps">
+          <li><span class="n">1</span><h3>Send your request</h3><p>Tell us the route, your home size and your date. It takes about two minutes and costs nothing.</p></li>
+          <li><span class="n">2</span><h3>We confirm your price</h3><p>Our team checks availability and the route, then sets your final price. You'll see it on your booking page.</p></li>
+          <li><span class="n">3</span><h3>Pay the deposit</h3><p>If you're happy, pay the <span data-fill="deposit">20</span>% deposit through PayPal from your booking page.</p></li>
+          <li><span class="n">4</span><h3>We plan your move</h3><p>Once the deposit is in, we contact you with the next steps for moving day.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Pricing laid out like an itemised receipt -->
+    <section class="section" id="pricing">
+      <div class="wrap split">
+        <div>
+          <h2>How we work out an estimate</h2>
+          <p>Your estimate adds a base fee, the miles, and the weight of your belongings, then adjusts for the size of your home. Your final price is set by our team after they check the details.</p>
+          <p class="example" id="example" hidden></p>
+        </div>
+        <dl class="ledger" aria-label="Current rates">
+          <div><dt>Base fee</dt><dd id="r-base">&mdash;</dd></div>
+          <div><dt>Per mile</dt><dd id="r-mile">&mdash;</dd></div>
+          <div><dt>Per pound</dt><dd id="r-pound">&mdash;</dd></div>
+          <div><dt>Studio or 1-bedroom</dt><dd id="r-small">&mdash;</dd></div>
+          <div><dt>2-bedroom</dt><dd id="r-standard">&mdash;</dd></div>
+          <div><dt>3-bedroom or larger</dt><dd id="r-large">&mdash;</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section tight" id="faq">
+      <div class="wrap narrow-wrap">
+        <h2>Questions people ask first</h2>
+        <details><summary>When do I pay?</summary><p>Not when you send the request. After our team approves your move and sets the final price, your booking page shows a PayPal checkout for the <span data-fill="deposit">20</span>% deposit.</p></details>
+        <details><summary>How do I find the driving distance?</summary><p>Look it up in any maps app and enter the miles. Our team checks the route before confirming your price, so a rough number is fine.</p></details>
+        <details><summary>How will I know my request went through?</summary><p>You get a private booking link right after you submit. It shows the status of your request and is where you pay once approved. If email is set up, we send the link to you too. Keep it somewhere safe.</p></details>
+        <details><summary>What if you can't take my move?</summary><p>We'll tell you on your booking page, with a reason. You haven't paid anything at that point, so there's nothing to refund.</p></details>
+        <details><summary>Is paying through PayPal safe?</summary><p>Payments are handled by PayPal. HaulHero never sees your card or bank details.</p></details>
+        <details><summary>How do I reach you?</summary><p id="faq-contact">Send your request and we'll reply on your booking page.</p></details>
+      </div>
+    </section>
+
+    <!-- Request form -->
+    <section class="band green" id="request">
+      <div class="wrap split">
+        <div class="request-intro">
+          <h2>Request your move</h2>
+          <p>Nothing is charged today. We review your request, confirm the final price, and you decide from there.</p>
+          <p class="request-estimate" id="f-estimate" hidden></p>
+        </div>
+        <form id="booking-form" class="form" novalidate>
+          <div class="grid">
+            <label>Moving from<input name="pickup" required maxlength="160" placeholder="Los Angeles, CA" autocomplete="off"></label>
+            <label>Moving to<input name="delivery" required maxlength="160" placeholder="Phoenix, AZ" autocomplete="off"></label>
+            <label>Driving distance (miles)<input name="miles" type="number" inputmode="numeric" min="1" max="10000" required></label>
+            <label>Estimated weight (lb)<input name="weightLb" type="number" inputmode="numeric" min="1" max="80000" required></label>
+            <label>Preferred moving date<input name="moveDate" id="moveDate" type="date" required></label>
+            <label>Load size
+              <select name="loadSize"><option value="small">Small (studio or 1-bedroom)</option><option value="standard" selected>Standard (2-bedroom)</option><option value="large">Large (3-bedroom or more)</option></select>
+            </label>
+            <label>Your name<input name="customerName" required maxlength="120" autocomplete="name"></label>
+            <label>Email<input name="email" type="email" required maxlength="254" autocomplete="email"></label>
+            <label class="full">Phone (optional)<input name="phone" type="tel" maxlength="40" autocomplete="tel"></label>
+          </div>
+          <label>Anything we should know?<textarea name="notes" maxlength="1500" rows="3" placeholder="Stairs, long carry, fragile or oversized items"></textarea></label>
+          <div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+          <button type="submit" class="btn btn-block">Send my request</button>
+          <div id="result" role="status"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p class="brand"><span class="mark" aria-hidden="true">H</span>HaulHero</p>
+      <p>Long-distance moves from Los Angeles, California.</p>
+      <p id="foot-contact"></p>
+      <p id="foot-legal" class="legal"></p>
+    </div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

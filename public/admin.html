@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Staff — HaulHero</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;800&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header><a class="brand" href="/"><span>H</span> HaulHero staff</a><small id="who"></small></header>
+  <main class="wide">
+    <form id="login" class="login">
+      <label>Staff access token<input id="token" type="password" autocomplete="current-password" required></label>
+      <button type="submit">Sign in</button>
+      <div id="login-msg" role="status"></div>
+    </form>
+    <section id="panel" hidden>
+      <div class="toolbar">
+        <label>Show
+          <select id="filter">
+            <option value="ACTIVE">Needs attention</option>
+            <option value="ALL">All</option>
+            <option value="PENDING_REVIEW">Pending review</option>
+            <option value="AWAITING_DEPOSIT">Awaiting deposit</option>
+            <option value="DEPOSIT_PAID">Deposit paid</option>
+            <option value="PAYMENT_REVIEW">Payment review</option>
+            <option value="DECLINED">Declined</option>
+          </select>
+        </label>
+        <button id="refresh" class="secondary" type="button">Refresh</button>
+        <button id="logout" class="secondary" type="button">Sign out</button>
+      </div>
+      <div id="list"></div>
+    </section>
+  </main>
+  <script src="/admin.js"></script>
+</body></html>
